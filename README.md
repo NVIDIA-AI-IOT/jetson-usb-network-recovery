@@ -3,7 +3,8 @@
 A narrowly scoped **prototype** for recovering a Jetson Orin Nano's USB network
 from a Mac, even when SSH and internet access are unavailable on the Jetson.
 
-Copy **only `jetson_usb_network_recovery.py`** to the Mac. The script uses the
+Copy `jetson_usb_network_recovery.py` and the accompanying [LICENSE](LICENSE)
+to the Mac. The script uses the
 Python standard library; Screen, pip packages and a clone on the Jetson are not
 required. Python **3.9 or later** must already be available on the Mac, and
 `/usr/bin/python3` must be present on the Jetson.
@@ -14,7 +15,7 @@ device. Broader validation remains incomplete; see [validation](docs/validation.
 Linux tests are not substitutes for testing other physical combinations.
 
 This is a **private development prototype**, not a public or approved NVIDIA
-release. OSRB review and public-release/license decisions are pending; this
+release. OSRB review and public-release approval are pending; this
 repository does not claim that review has been completed.
 
 Version **0.1.1** fixes a password-entry bug in 0.1.0: opening `/dev/tty` in
@@ -200,3 +201,13 @@ review process. This repository contains no real credentials or raw serial logs.
 - [Python termios](https://docs.python.org/3/library/termios.html)
 - [Python getpass](https://docs.python.org/3/library/getpass.html)
 - [systemd service configuration](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+
+## License and contributions
+
+This project is licensed under the [Apache License 2.0](LICENSE).
+Keep the license and copyright notices with any copy you distribute.
+See [third-party software and distribution scope](THIRD_PARTY_NOTICES.md) for
+information about independently installed runtime prerequisites.
+
+External contributions are welcome. All contributions must include DCO sign-off;
+see [CONTRIBUTING.md](CONTRIBUTING.md) for the requirements and full certificate.
