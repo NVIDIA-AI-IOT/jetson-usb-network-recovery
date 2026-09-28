@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Mac-side, standard-library-only recovery for one Jetson USB NCM defect.
 
 Copy this file to the Mac. Python 3.9+ is required; no pip packages are needed.
@@ -36,6 +38,8 @@ VERSION = "0.1.1"
 # It also becomes the optional root-owned ExecStartPost helper. Keep all
 # configuration-changing operations here so the same guards run at boot.
 REMOTE_LIB = r'''
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 import hashlib
 import json
 import os
