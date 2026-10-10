@@ -56,4 +56,5 @@ operations on the X299 host or an attached Jetson.
 - Other Mac/Python versions and integrated-terminal permission configurations.
 
 The successful reboot test is not proof of all acceptance criteria, a vendor
-fix, a production-ready release, or completed OSRB review.
+fix, or production readiness. Open-source release approval does not expand the
+physical validation coverage recorded here.

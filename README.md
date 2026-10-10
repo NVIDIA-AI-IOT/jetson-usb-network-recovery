@@ -14,9 +14,8 @@ installation, and healthy USB networking after a full reboot on one R39.2.1
 device. Broader validation remains incomplete; see [validation](docs/validation.md).
 Linux tests are not substitutes for testing other physical combinations.
 
-This is a **private development prototype**, not a public or approved NVIDIA
-release. OSRB review and public-release approval are pending; this
-repository does not claim that review has been completed.
+This Apache-2.0 source release is a **scoped workaround**, not a replacement for
+a Jetson Linux update. Check the affected software below before using it.
 
 Version **0.1.1** fixes a password-entry bug in 0.1.0: opening `/dev/tty` in
 buffered read/write mode failed on a non-seekable terminal, before diagnosis or
@@ -93,7 +92,7 @@ brings it UP. It does not assume the interface is named `usb1`.
 
 This change does **not** survive USB gadget recreation or reboot.
 
-### Persistent repair for recording preparation
+### Persistent repair
 
 After reviewing the diagnosis, use:
 
@@ -154,7 +153,8 @@ Exit status:
 The trusted physical console's ED25519 host fingerprint is printed when readable.
 Compare it against the first SSH connection prompt. This tool does not edit
 `known_hosts`, create keys, configure key login, connect Wi-Fi, install Codex or
-install Skills. Those actions can remain part of the F1–F10 recording.
+install Skills. Continue with your normal SSH and development-environment setup
+after USB networking is working.
 
 If Terminal reaches SSH but the desktop app does not, investigate that app's
 Local Network permission separately; this tool does not change macOS privacy
@@ -191,10 +191,9 @@ real host network or systemd configuration. Password tests open a real controlli
 pseudo-terminal and exercise hidden input, restoration of echo after success,
 EOF and Ctrl-C, and refusal of piped input without a controlling terminal.
 The host CLI intentionally refuses
-physical operation on non-macOS hosts. The private development repository is
-[chitoku/jetson-usb-network-recovery](https://github.com/chitoku/jetson-usb-network-recovery).
-Do not make it public or distribute it as an approved release before the separate
-review process. This repository contains no real credentials or raw serial logs.
+physical operation on non-macOS hosts. Source and issue reports are hosted at
+[NVIDIA-AI-IOT/jetson-usb-network-recovery](https://github.com/NVIDIA-AI-IOT/jetson-usb-network-recovery).
+Do not include passwords, private keys, or unredacted serial logs in issue reports.
 
 ## References
 
