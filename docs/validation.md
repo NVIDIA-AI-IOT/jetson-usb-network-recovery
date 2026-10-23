@@ -37,13 +37,13 @@ requires seeking and failed before diagnosis or repair. Version 0.1.1 opens a
 write-only prompt stream and lets `getpass` handle terminal input and echo.
 The non-echoing login and sudo paths both completed in the user-operated test.
 
-X299 automated validation: **40 tests passed** on September 16. Tests include
+Linux automated validation: **40 tests passed** on September 16. Tests include
 real controlling pseudo-terminal hidden input, restored terminal state after
 success/EOF/Ctrl-C, failure without a controlling terminal or echo control,
 simulated serial authentication, change approvals' remote state guards,
 configuration-file ownership/rollback, and scoped network probes.
 They use synthetic credentials and simulated target commands, not real repair
-operations on the X299 host or an attached Jetson.
+operations on the Linux test host or an attached Jetson.
 
 ## Still to validate physically
 
