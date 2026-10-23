@@ -3,12 +3,6 @@
 A narrowly scoped **prototype** for recovering a Jetson Orin Nano's USB network
 from a Mac, even when SSH and internet access are unavailable on the Jetson.
 
-Copy `jetson_usb_network_recovery.py` and the accompanying [LICENSE](LICENSE)
-to the Mac. The script uses the
-Python standard library; Screen, pip packages and a clone on the Jetson are not
-required. Python **3.9 or later** must already be available on the Mac, and
-`/usr/bin/python3` must be present on the Jetson.
-
 User-provided Mac/Jetson test output confirms diagnosis, temporary repair,
 installation, and healthy USB networking after a full reboot on one R39.2.1
 device. Broader validation remains incomplete; see [validation](docs/validation.md).
@@ -16,11 +10,6 @@ Linux tests are not substitutes for testing other physical combinations.
 
 This Apache-2.0 source release is a **scoped workaround**, not a replacement for
 a Jetson Linux update. Check the affected software below before using it.
-
-Version **0.1.1** fixes a password-entry bug in 0.1.0: opening `/dev/tty` in
-buffered read/write mode failed on a non-seekable terminal, before diagnosis or
-repair. Copy the updated Python file to the Mac before retrying. The Jetson-side
-helper and repair logic are unchanged.
 
 ## Scope
 
@@ -38,12 +27,26 @@ service, interface state and bridge ownership. It refuses repairs outside this
 scope. It does not implement a general USB, DHCP, SSH or Wi-Fi repair system.
 An already-UP NCM interface in `l4tbr0` is not treated as broken.
 
+## Requirements
+
+- **Mac:** Python 3.9 or later and an interactive terminal with access to the
+  Jetson's USB serial console.
+- **Jetson:** the hardware and software listed above, with `/usr/bin/python3`
+  available. Have the Jetson login credentials ready; repair and installation
+  also require Jetson sudo authentication.
+- **Connection:** a data-capable USB cable connected to the Jetson's USB
+  device-mode port.
+
+The script uses the Python standard library. Screen, pip packages, and a
+repository clone on the Jetson are not required.
+
 ## Mac: first test
 
 1. Complete Ubuntu's first-run setup on the Jetson and allow it to reboot.
 2. Connect its USB device-mode port to the Mac with a data-capable cable.
 3. Close Screen and any other programs using the USB serial console.
-4. Save the Python file, for example in `~/Downloads`.
+4. Save [jetson_usb_network_recovery.py](jetson_usb_network_recovery.py) and the
+   accompanying [LICENSE](LICENSE) on the Mac, for example in `~/Downloads`.
 5. In a local Mac terminal, check Python and run **diagnosis first**:
 
 ```bash
@@ -167,7 +170,7 @@ in process memory; Python does not guarantee secure memory erasure.
 
 ## Physical acceptance checklist
 
-- [x] Recording pair and Jetson package version recorded; exact Mac version was user-reported, not independently queried.
+- [x] Tested Mac/Jetson combination and Jetson package version recorded; exact Mac version was user-reported, not independently queried.
 - [x] Diagnostic mode identifies the known defect without modifying configuration.
 - [ ] Wrong password stops without repeated login attempts or printing the secret.
 - [ ] Concurrent serial-console use is avoided; unknown prompts fail closed.
@@ -179,7 +182,10 @@ in process memory; Python does not guarantee secure memory erasure.
 - [ ] Uninstall removes only the owned files and preserves the current connection.
 - [ ] Unsupported/fixed systems are not modified.
 
-## Development on X299
+## Development and testing
+
+Run the automated tests from the repository root on Linux with Python 3.9 or
+later:
 
 ```bash
 python3 -m unittest discover -s tests -v
@@ -190,10 +196,24 @@ Tests use simulated target files/commands and Linux pseudo-terminals, never the
 real host network or systemd configuration. Password tests open a real controlling
 pseudo-terminal and exercise hidden input, restoration of echo after success,
 EOF and Ctrl-C, and refusal of piped input without a controlling terminal.
-The host CLI intentionally refuses
-physical operation on non-macOS hosts. Source and issue reports are hosted at
-[NVIDIA-AI-IOT/jetson-usb-network-recovery](https://github.com/NVIDIA-AI-IOT/jetson-usb-network-recovery).
+The host CLI intentionally refuses physical operation on non-macOS hosts.
+Passing these tests does not replace validation on a Mac connected to a
+supported Jetson; see the [validation record](docs/validation.md).
+
+## Reporting issues
+
+For non-security bugs and usage questions, open a
+[GitHub issue](https://github.com/NVIDIA-AI-IOT/jetson-usb-network-recovery/issues).
 Do not include passwords, private keys, or unredacted serial logs in issue reports.
+Report suspected security vulnerabilities privately as described in
+[SECURITY.md](SECURITY.md).
+
+## Version notes
+
+Version **0.1.1** fixes a password-entry bug in 0.1.0: opening `/dev/tty` in
+buffered read/write mode failed on a non-seekable terminal, before diagnosis or
+repair. Copy the updated Python file to the Mac before retrying. The Jetson-side
+helper and repair logic are unchanged.
 
 ## References
 
